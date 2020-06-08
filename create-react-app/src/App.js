@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useContext } from 'react';
+import { FormContext } from './service/context'
+import Form from './form'
 import './App.css';
 
 function App() {
+  const FormState = useContext(FormContext)
+  const [formState, setFormState] = useState('null')
+  // const [counter, setCounter] = useState(
+  //   parseInt(sessionStorage.getItem('counter' || 0))
+  // )
+  const [counter, setCounter] = useState(0)
+
+  // sessionStorage.setItem('name', name)
+  
+  function incrementCounter(){
+    setCounter(counter + 1)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <h1>Session state</h1>
+      <button onClick={incrementCounter}>Clicked: {counter}</button>
+      {/* <FormState.Provider value={{formState, setFormState}}> */}
+        <Form></Form>
+        <p>Text</p>
+      {/* </FormState.Provider> */}
+    </main>
   );
 }
 
