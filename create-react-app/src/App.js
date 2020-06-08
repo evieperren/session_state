@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { FormContext } from './service/context'
 import Form from './form'
 import './App.css';
+import { writeToSessionStorage } from './service/session';
 
 function App() {
   const FormState = useContext(FormContext)
@@ -15,6 +16,7 @@ function App() {
   
   function incrementCounter(){
     setCounter(counter + 1)
+    writeToSessionStorage('counter', counter)
   }
 
   return (
