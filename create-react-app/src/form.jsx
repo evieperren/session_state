@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { writeToSessionStorage, getSessionStorage } from './service/session'
+import { writeToSessionStorage, getSessionStorage, ensureString } from './service/session'
 
 const Form = () => {
   const [name, setName] = useState('')
-  const [bio, setBio] = useState('')
-
+  const [bio, setBio] = useState(ensureString(getSessionStorage('bio')))
+  
   useEffect(() => {
-   getSessionStorage('name')
-  }, [name])
+    console.log('writing to bio')
+    writeToSessionStorage('bio', bio)
+  }, [bio])
 
   function handleOnChange(e){
     setName(e.target.value)
-    writeToSessionStorage('name', name)
   }
   function handleBio (e) {
     setBio(e.target.value)
-    writeToSessionStorage('bio', bio)
-    console.log(getSessionStorage('bio')) // undefined
   }
   return (
     <form>
